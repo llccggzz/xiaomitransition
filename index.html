@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+  <title>Document</title>
+  <style>
+    .container {
+      display: flex;
+      align-items: flex-start;
+      /* 垂直对齐项目（默认即可，但明确指定以防万一）*/
+    }
+
+    .top {
+      /*  white-space: nowrap; */
+      margin-left: 20px;
+      display: flex;
+      align-items: center;
+      /* 垂直对齐项目 */
+      justify-content: space-between;
+      /* 水平分布项目，第一个与最后一个分别对齐到两侧 */
+
+    }
+
+    .top p {
+      margin: 0;
+      /* 移除默认的 margin */
+
+      font-size: 21px;
+
+    }
+
+    .topLeft {
+      margin-left: 20px;
+      display: flex;
+      /* 包裹图标和第一个 p 标签的容器也需要是 Flex 容器 */
+      align-items: center;
+      /* 垂直对齐内部的图标和 p 标签 */
+      /*  margin-right: auto; */
+      /* 使这个容器的内容靠左，并与其他内容分开 */
+    }
+
+    .topLeft img {
+      width: 50px;
+      height: 50px;
+      margin-right: 10px;
+      /* 图片和文本之间的间距 */
+    }
+
+    .topRight {
+      display: flex;
+
+      align-items: center;
+      /* 垂直居中对齐 */
+      margin-left: 500px;
+    }
+
+    .topRight p:not(:last-child) {
+      font-size: 16px;
+
+      margin-right: 20px;
+      /* 为非最后一个p标签添加右侧间距 */
+      margin-bottom: 0;
+      color: rgb(195, 193, 193);
+    }
+
+    .topRight p:last-child {
+      font-size: 16px;
+      /* 确保最后一个p标签的字体大小与其他一致 */
+      margin-right: 0;
+      /* 最后一个p标签没有右侧间距 */
+      color: rgb(195, 193, 193);
+    }
+
+    .content {
+      border: 1px solid rgb(252, 252, 252);
+      box-shadow: 0px 0px 10px 0px rgba(183, 180, 180, 0.2);
+      width: 400px;
+      height: 600px;
+      margin: auto;
+      margin-top: 50px;
+      padding: 20px;
+    }
+
+
+
+    .content-top {
+      display: flex;
+
+    }
+
+    .content ul {
+      list-style: none;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .content ul li {
+      margin: 0 10px;
+      font-size: 14px;
+    }
+
+    .content ul li a {
+      text-decoration: none;
+      border-bottom: 3px solid transparent;
+      color: #706f6f59;
+      font-size: 20px;
+    }
+
+    .content ul li a.active {
+      border-color: #fe852f;
+      color: #000000;
+    }
+
+    .form input:not(:last-child) {
+      height: 36px;
+      width: 280px;
+      margin-left: 50px;
+      border: none;
+      background-color: #f5f5f5;
+      list-style: none;
+      display: flex;
+      padding: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      font-size: 16px;
+    }
+
+    .login {
+      border: none;
+      background-color: #f4c19c;
+      color: white;
+      font-size: 18px;
+      height: 36px;
+      width: 300px;
+      margin-left: 50px;
+      margin-top: 18px;
+    }
+
+    .bottom :nth-child(4) {
+      color: #706f6f59;
+      text-align: center;
+    }
+
+    .otherLogin {
+      color: #706f6f59;
+      text-align: center;
+    }
+
+    .bottom img {
+      height: 45px;
+      width: 300px;
+      margin-left: 35px;
+    }
+
+    .forget {
+      margin-left: 50px;
+      color: #fe852f;
+    }
+
+    .phone {
+      color: #fe852f;
+      display: inline;
+      margin-left: 150px;
+    }
+
+    .forget,
+    .phone {
+      display: inline-block;
+      /* 其他样式，如边距、间距等 */
+    }
+
+    .form span {
+      margin-left: 50px;
+      font-size: 13px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+
+
+    select {
+      height: 50px;
+      width: 300px;
+      margin-left: 50px;
+      border: none;
+      background-color: #f5f5f5;
+      list-style: none;
+      display: flex;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .number {
+      height: 36px;
+      width: 280px;
+      margin-left: 50px;
+      border: none;
+      background-color: #f5f5f5;
+      list-style: none;
+      display: flex;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .check {
+      height: 36px;
+      width: 280px;
+      margin-left: 50px;
+      border: none;
+      background-color: #f5f5f5;
+      list-style: none;
+      display: flex;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+
+
+    .checkbox {
+      /*  height: 36px;
+      width: 300px; */
+      margin-left: 50px;
+      border: none;
+      /* background-color: #f5f5f5; */
+      list-style: none;
+      display: flex;
+      padding: 10px;
+      font-size: 16px;
+    }
+
+    .checkbox :nth-child(2) {
+      color: #42424259;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .checkbox :nth-child(4) {
+      color: #42424259;
+      text-align: center;
+      font-size: 13px;
+    }
+
+    .checkbox :nth-child(3) {
+      color: #000000e1;
+      text-align: center;
+      font-size: 13.5px;
+      margin-left: 4px;
+      margin-right: 4px;
+    }
+
+    .checkbox :nth-child(5) {
+      color: #000000e1;
+      text-align: center;
+      font-size: 13.5px;
+      margin-left: 4px;
+    }
+
+
+    .v-move,
+    .my-enter-active,
+    .my-leave-active {
+      transition: all 1s linear;
+
+    }
+
+    .my-enter,
+    .my-leave-to {
+      opacity: 0;
+
+    }
+
+    .my-leave-to {
+      transform: translateX(150px);
+    }
+
+    .my-enter-to {
+      opacity: 1;
+      transform: translateX(150px);
+    }
+
+    /*  .v-leave-active {
+      position: absolute;
+    } */
+  </style>
+</head>
+
+<body>
+  <div id="root"> </div>
+  <template id="myRoot">
+
+    <div class="container">
+
+      <div class="top">
+        <div class="topLeft">
+          <img src="./images/小米.png">
+          <p>小米账号</p>
+        </div>
+        <div class="topRight">
+          <p>用户协议</p>
+          <p>隐私政策</p>
+          <p>帮助中心</p>
+          <p>| </p>
+          <p>中文(简体) </p>
+        </div>
+
+      </div>
+    </div>
+    <button @click="showContent">登录</button>
+    <transition name="my">
+      <div class="content" v-if="show">
+
+        <div class="content-top">
+          <ul>
+            <li><a class="active">登录</a></li>
+            <li><a>注册</a></li>
+          </ul>
+        </div>
+        <!-- 登录表单 -->
+        <form>
+          <div class="form">
+            <input type="text" v-model="admin" placeholder="邮箱/手机号码/小米ID">
+            <span>{{error.admin}}</span><br>
+            <input type="text" v-model="password" placeholder="密码">
+            <span>{{error.password}}</span><br>
+          </div>
+          <div class="checkbox">
+            <input type="checkbox">
+            <span>已阅读并同意小米账号</span>
+            <span>用户协议</span>
+            <span>和</span>
+            <span>隐私政策</span>
+          </div>
+
+          <div class="bottom">
+            <button class="login">登录</button>
+            <p class="forget">忘记密码?</p>
+            <p class="phone">手机号登录</p>
+            <p>其他方式登录</p>
+            <img src="./images/bottom.png">
+          </div>
+        </form>
+      </div>
+    </transition>
+  </template> <!-- 根组件模板 -->
+  <script>
+    const app = Vue.createApp({//app表示应用实例
+      template: '#myRoot',//temolate就是模板的意思
+      data() {
+
+        return {
+
+          admin: '',
+          password: '',
+          contry: '',
+          number: '',
+          checknum: '',
+          error: {},
+          show: false
+        }
+
+      },
+      methods: {
+        showContent() {
+          this.show = !this.show
+        }
+      }
+    })
+    const vm = app.mount('#root')//vm表示根组件
+  </script>
+
+</body>
+
+</html>
